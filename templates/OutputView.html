@@ -3,11 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Result</title>
+    <style type="text/css">
+        div.testcase-status {
+            padding:2px;
+            font-family: "DejaVu Sans";
+            margin-left:1%;
+            border-left:2px solid green;
+            border:1px inset black;
+            margin-top:1%;
+        }
+        .testcase-status h2 {
+            font-size:17px;
+        }
+        pre {
+            margin-left: 3%;
+        }
+        .status-text {
+            text-decoration: underline;
+            text-transform: uppercase;
+            font-size:15px;
+            color:blue;
+        }
+    </style>
 </head>
 <body>
-    <h2> Output: </h2>
-    <p><pre>{{ output | safe }}</pre></p>
-    <h2> Errors: </h2>
-    <p><pre>{{ error | safe }}</pre></p>
+    <div class="testcase-status">
+        <h2> Testcase 1 <span class="status-text">{{ t0 }}</span> </h2>
+        <h2> Output: </h2>
+        <p><pre>{{ output0 | safe }}</pre></p>
+        <h2> Errors: </h2>
+        <p><pre>{{ error0 | safe }}</pre></p>
+    </div>
+    <div class="testcase-status">
+        <h2> Testcase 2 <span class="status-text">{{ t1 }}</span> </h2>
+        <h2> Output: </h2>
+        <p><pre>{{ output1 | safe }}</pre></p>
+        <h2> Errors: </h2>
+        <p><pre>{{ error1 | safe }}</pre></p>
+    </div>
+    <div class="testcase-status">
+        <h2> Testcase 3 <span class="status-text">{{ t2 }}</span> </h2>
+        <h2> Output: </h2>
+        <p><pre>{{ output2 | safe }}</pre></p>
+        <h2> Errors: </h2>
+        <p><pre>{{ error2 | safe }}</pre></p>
+    </div>
+    <div class="testcase-status">
+        <h2> Testcase 4 <span class="status-text">{{ t3 }}</span> </h2>
+        <h2> Output: </h2>
+        <p><pre>{{ output3 | safe }}</pre></p>
+        <h2> Errors: </h2>
+        <p><pre>{{ error3 | safe }}</pre></p>
+    </div>
 </body>
 </html>
