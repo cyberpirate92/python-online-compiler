@@ -1,14 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        input[type='submit'],input[type='reset'] {
+            border:none;
+            padding:5px;
+            font-weight:bold;
+            font-family:"Lucida Sans",Constantia,sans-serif;
+            background:rgba(0,0,0,0.2);
+            -webkit-transition: all 1s ease-in;
+            -moz-transition: all 0.5s ease-in;
+        }
+        input[type='submit']:hover,input[type='reset']:hover {
+            background:rgba(0,0,0,0.1);
+        }
+        .wrapper {
+            padding:2%;
+        }
+    </style>
 </head>
 <body>
-    <form action="compiler" method="POST">
-        {{ form }}
-        {% csrf_token %}
-        <input type="submit">
-    </form>
+    <div class="wrapper">
+        <h3> Online Compiler </h3>
+        <form action="compiler" method="POST"> {% csrf_token %}
+            <table>
+                <tr>
+                    <td> {{ form.has_template.label }} </td>
+                    <td> {{ form.has_template }} </td>
+                    <td> {{ form.has_template.errors }} </td>
+                </tr>
+                <tr>
+                    <td>{{ form.template.label }}</td>
+                    <td>{{ form.template }}</td>
+                    <td>{{ form.code.label }}</td>
+                    <td><div id="code">{{ form.code }}</div></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="errors">{{ form.template.errors }}</td>
+                    <td colspan="2" class="errors">{{ form.code.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.input.label }}</td>
+                    <td>{{ form.input }}</td>
+                    <td>{{ form.output.label }}</td>
+                    <td>{{ form.output }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="errors">{{ form.input.errors }}</td>
+                    <td colspan="2" class="errors">{{ form.output.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.language.label }}</td>
+                    <td>{{ form.language }}</td>
+                    <td class="errors">{{ form.language.errors }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="right">
+                        <input type="submit" value="Submit Code">
+                        <input type="reset" value="Clear All">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>

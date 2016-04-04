@@ -4,6 +4,7 @@ from . import forms
 from . import CompilerUtils
 from .CompilerUtils import Compiler,TestCase,Language
 
+
 # Create your views here.
 def testpage(request):
     template_data = {}
@@ -28,28 +29,24 @@ def testpage(request):
                 if lan == Language.PYTHON:
                     executor.setCode(code)
                     executor.setLanguage(lan)
-                    executor.addTestCase(testcase)
                     if has_template:
                         executor.setTemplate(code_template)
                     executor.execute()
                     executor.deleteCodeFile()
                     if executor.hasExecuted:
                         checked_values = executor.checkOutputs()
-
-                        for i in range(len(checked_values)):
-                            if checked_values[i]:
-                                template_data['t'+str(i)] = "success!"
-                            else:
-                                template_data['t'+str(i)] = "failed!"
-
-                        for i in range(len(executor.getOutput())):
+                        displaydata = []
+                        outputs = executor.getOutput()
+                        errors = executor.getErrors()
+                        for i in range(len(outputs)):
                             if executor.hasErrors:
-                                template_data['error'+str(i)] = executor.getErrors()[i]
+                                e = errors[i]
                             else:
-                                template_data['error'+str(i)] = "No errors :)"
-                            template_data['output'+str(i)] = executor.getOutput()[i]
-
-                        return render(request,'OutputView.html',template_data)
+                                e = "No errors!"
+                            tup = (i+1,checked_values[i],outputs[i],e)
+                            displaydata.append(tup)
+                        template_data['displaydata'] = displaydata
+                        return render(request,'OutputView1.html',template_data)
                     else:
                         return render(request,'generic_error.html',{'error':'Sorry! Execution failed'})
         else:

@@ -54,6 +54,7 @@ class Compiler:
     maxExecTime = 60  # Default value, can be overridden
 
     def addTestCase(self,test_case):
+        print("** Testcase added **")
         if isinstance(test_case,TestCase):
             if self.test_cases is None:
                 self.test_cases = []
@@ -135,9 +136,10 @@ class Compiler:
             print("len : "+str(len(str(expected_output))))
             print("AC: "+actual_output)
             print("len : "+str(len(str(actual_output))))
+            print("Comparison : "+str(expected_output == actual_output))
             # Debug ONLY............................
 
-            values.append(expected_output is actual_output)
+            values.append(expected_output == actual_output)
             index += 1
 
         # Debug ONLY .....................
