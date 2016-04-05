@@ -50,15 +50,33 @@
             font-family:inherit;
             background:rgba(255,255,0,0.3);
         }
+        #status_header table {
+            width:50%;
+            margin-left:20%;
+            border-collapse: collapse;
+        }
+        #status_header table,#status_header td,#status_header th {
+            text-align:center;
+            border:2px solid black;
+        }
+        #status_header th,#status_header td {
+            padding: 1%;
+        }
+        #status_header th {
+            background:rgba(255,99,71,0.7);
+        }
     </style>
 </head>
 <body>
     <div id="status_header">
         <table>
             <tr>
-                <td> Status </td>
-                <td> Total test cases </td>
-                <td> Number of test cases passed </td>
+                <th rowspan="2"> Status </th>
+                <th colspan="2"> Test Cases </th>
+            </tr>
+            <tr>
+                <th> Total </th>
+                <th> Passed </th>
             </tr>
             <tr>
                 <td> {{ result }}</td>
@@ -71,12 +89,12 @@
             {% if status == True %}
                 <div class="testcase-status success-bg">
                 <div class="leftPane">
-                    <h2> Testcase {{ i }} <span class="status-text-success">success</span> </h2>
+                    <h3> Testcase {{ i }} <span class="status-text-success">success</span> </h3>
                 </div>
             {% else %}
                 <div class="testcase-status fail-bg">
                 <div class="leftPane">
-                    <h2> Testcase {{ i }} <span class="status-text-fail">fail</span> </h2>
+                    <h3> Testcase {{ i }} <span class="status-text-fail">fail</span> </h3>
                 </div>
             {% endif %}
 

@@ -33,6 +33,9 @@ def testpage(request):
                         executor.set_template(code_template)
                     execution_result = executor.execute()
                     template_data['result'] = execution_result.name
+                    template_data['test_cases_total'] = executor.get_num_test_cases()
+                    if executor.get_num_failed_test_cases() is not None:
+                        template_data['test_cases_passed'] = executor.get_num_test_cases() - executor.get_num_failed_test_cases()
                     executor.delete_code_file()
                     if executor.hasExecuted:
                         checked_values = executor.compare_outputs()
