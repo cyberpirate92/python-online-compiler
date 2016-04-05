@@ -1,17 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Result</title>
-
     <style type="text/css">
+        body {
+            background:whitesmoke;
+        }
         div.testcase-status {
             padding:2px;
-            font-family: "DejaVu Sans";
+            padding-left:20px;
+            font-family: "DejaVu Sans",Constantia,sans-serif;
             margin-left:1%;
-            border-left:2px solid green;
-            border:1px inset black;
+            border:1px inset;
             margin-top:1%;
         }
         .testcase-status h2 {
@@ -20,42 +21,72 @@
         pre {
             margin-left: 3%;
         }
-        .status-text {
+        .status-text-success {
             text-decoration: underline;
             text-transform: uppercase;
             font-size:15px;
-            color:blue;
+            color:green;
+        }
+        .status-text-fail
+        {
+            text-decoration: underline;
+            text-transform: uppercase;
+            font-size:15px;
+            color:red;
+        }
+        .success-bg {
+            background:rgba(0,255,0,0.1);
+        }
+        .fail-bg {
+            background: rgba(255,0,0,0.1);
+        }
+        .rightPane {
+            padding:1%;
+            margin-left: 3%;
+            border-left:2px solid black;
+        }
+        div#status_header {
+            padding:1%;
+            font-family:inherit;
+            background:rgba(255,255,0,0.3);
         }
     </style>
 </head>
 <body>
-    <div class="testcase-status">
-        <h2> Testcase 1 <span class="status-text">{{ t0 }}</span> </h2>
-        <h2> Output: </h2>
-        <p><pre>{{ output0 | safe }}</pre></p>
-        <h2> Errors: </h2>
-        <p><pre>{{ error0 | safe }}</pre></p>
+    <div id="status_header">
+        <table>
+            <tr>
+                <td> Status </td>
+                <td> Total test cases </td>
+                <td> Number of test cases passed </td>
+            </tr>
+            <tr>
+                <td> {{ result }}</td>
+                <td> {{ test_cases_total }}</td>
+                <td> {{ test_cases_passed }}</td>
+            </tr>
+        </table>
     </div>
-    <div class="testcase-status">
-        <h2> Testcase 2 <span class="status-text">{{ t1 }}</span> </h2>
-        <h2> Output: </h2>
-        <p><pre>{{ output1 | safe }}</pre></p>
-        <h2> Errors: </h2>
-        <p><pre>{{ error1 | safe }}</pre></p>
-    </div>
-    <div class="testcase-status">
-        <h2> Testcase 3 <span class="status-text">{{ t2 }}</span> </h2>
-        <h2> Output: </h2>
-        <p><pre>{{ output2 | safe }}</pre></p>
-        <h2> Errors: </h2>
-        <p><pre>{{ error2 | safe }}</pre></p>
-    </div>
-    <div class="testcase-status">
-        <h2> Testcase 4 <span class="status-text">{{ t3 }}</span> </h2>
-        <h2> Output: </h2>
-        <p><pre>{{ output3 | safe }}</pre></p>
-        <h2> Errors: </h2>
-        <p><pre>{{ error3 | safe }}</pre></p>
-    </div>
+    {% for i,status,output,error in display_data %}
+            {% if status == True %}
+                <div class="testcase-status success-bg">
+                <div class="leftPane">
+                    <h2> Testcase {{ i }} <span class="status-text-success">success</span> </h2>
+                </div>
+            {% else %}
+                <div class="testcase-status fail-bg">
+                <div class="leftPane">
+                    <h2> Testcase {{ i }} <span class="status-text-fail">fail</span> </h2>
+                </div>
+            {% endif %}
+
+            <div class="rightPane">
+                <h2> Output: </h2>
+                <p><pre>{{ output | safe }}</pre>
+                <h2> Errors: </h2>
+                <p><pre>{{ error | safe }}</pre>
+            </div>
+        </div>
+    {% endfor %}
 </body>
 </html>

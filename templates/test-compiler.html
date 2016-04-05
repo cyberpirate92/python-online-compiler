@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style type="text/css">
+        body {
+            font-family:"Lucida Sans",Constantia,sans-serif;
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-family: "Lucida Bright",Constantia,sans-serif;
+        }
         input[type='submit'],input[type='reset'] {
             border:none;
             padding:5px;
@@ -33,6 +39,11 @@
                     <td> {{ form.has_template.errors }} </td>
                 </tr>
                 <tr>
+                    <td>{{ form.language.label }}</td>
+                    <td>{{ form.language }}</td>
+                    <td class="errors">{{ form.language.errors }}</td>
+                </tr>
+                <tr>
                     <td>{{ form.template.label }}</td>
                     <td>{{ form.template }}</td>
                     <td>{{ form.code.label }}</td>
@@ -51,11 +62,6 @@
                 <tr>
                     <td colspan="2" class="errors">{{ form.input.errors }}</td>
                     <td colspan="2" class="errors">{{ form.output.errors }}</td>
-                </tr>
-                <tr>
-                    <td>{{ form.language.label }}</td>
-                    <td>{{ form.language }}</td>
-                    <td class="errors">{{ form.language.errors }}</td>
                 </tr>
                 <tr>
                     <td colspan="4" align="right">
